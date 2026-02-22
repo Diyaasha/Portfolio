@@ -67,27 +67,36 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Intersection Observer for fade-in animations
+// Intersection Observer for scroll-triggered animations
 const observerOptions = {
     threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
+    rootMargin: '0px 0px -50px 0px'
 };
 
-const observer = new IntersectionObserver((entries) => {
+const scrollObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
+            entry.target.classList.add('scroll-animate');
+            // Stop observing once animated
+            scrollObserver.unobserve(entry.target);
         }
     });
 }, observerOptions);
 
-// Observe all sections for animations
-document.querySelectorAll('section:not(.hero)').forEach(section => {
-    section.style.opacity = '0';
-    section.style.transform = 'translateY(20px)';
-    section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(section);
+// Observe all boxes/cards that should animate on scroll
+const animateElements = [
+    '.about-card',
+    '.about-description',
+    '.skill-category',
+    '.timeline-item',
+    '.project-card',
+    '.contact-item'
+];
+
+animateElements.forEach(selector => {
+    document.querySelectorAll(selector).forEach(element => {
+        scrollObserver.observe(element);
+    });
 });
 
 // Custom Cursor

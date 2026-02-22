@@ -8,6 +8,17 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <!-- Intro Screen -->
+    <div class="intro-screen">
+        <div class="code-background"></div>
+        <div class="intro-content">
+            <h1 class="intro-text"><span class="yellow-dot">●</span> <span class="greeting" data-greeting="Hello">Hello</span></h1>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+        </div>
+    </div>
+
     <!-- Custom Cursor -->
     <div class="cursor"></div>
     <div class="cursor-follower"></div>
@@ -34,12 +45,13 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-content">
-            <h1 class="hero-title">Hello, I'm <span class="highlight">Diyasha Nag</span></h1>
+            <h1 class="hero-title">Hi, I'm <span class="highlight">Diyasha Nag</span></h1>
             <p class="hero-subtitle">Computer Science Student & Full-Stack Developer</p>
             <p class="hero-description">Building innovative solutions with AI, Web Development, and Android Technologies</p>
             <div class="hero-buttons">
-                <a href="#contact" class="btn btn-primary">Get In Touch</a>
-                <a href="#projects" class="btn btn-secondary">View My Work</a>
+                <a href="#projects" class="btn btn-primary">View My Work</a>
+                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                <a href="https://drive.google.com/file/d/1tXJ7Rw9Lf_58bEIX0xBYEG6oxOHJoQCS/view" target="_blank" class="btn btn-tertiary"> Get My Resume</a>
             </div>
         </div>
     </section>
@@ -49,9 +61,29 @@
         <div class="container">
             <h2 class="section-title">About Me</h2>
             <div class="about-content">
-                <div class="about-text">
-                    <p>I'm a passionate Computer Science & Communication Engineering student at Kalinga Institute of Industrial Technology, Bhubaneswar, with a CGPA of 9.41. I specialize in full-stack web development, AI/ML, and Android development.</p>
-                    <p>With hands-on experience in building scalable applications, AI-powered systems, and automation solutions, I'm dedicated to creating innovative technology that solves real-world problems. I've worked on projects ranging from healthcare platforms to computer vision systems.</p>
+                <div class="about-grid">
+                    <div class="about-card">
+                        <div class="about-icon">🎓</div>
+                        <h3>Education</h3>
+                        <p>KIIT, Bhubaneswar</p>
+                        <p class="about-detail">CSE & Communication Engineering - CGPA: 9.41</p>
+                    </div>
+                    <div class="about-card">
+                        <div class="about-icon">💻</div>
+                        <h3>Specialization</h3>
+                        <p>Full-Stack Development</p>
+                        <p class="about-detail">AI/ML, Web & Android</p>
+                    </div>
+                    <div class="about-card">
+                        <div class="about-icon">🚀</div>
+                        <h3>Experience</h3>
+                        <p>Built Scalable Apps</p>
+                        <p class="about-detail">Solving Real-World Problems</p>
+                    </div>
+                    
+                </div>
+                <div class="about-description">
+                    <p>I'm a passionate Computer Science & Communication Engineering student dedicated to creating innovative technology that makes a difference. With hands-on experience in AI-powered systems, automation solutions, and full-stack development, I love tackling complex challenges and turning ideas into reality.</p>
                 </div>
             </div>
         </div>
@@ -76,7 +108,6 @@
                     <ul class="skill-list">
                         <li>HTML, CSS, JavaScript</li>
                         <li>React, Bootstrap, Material UI</li>
-                        <li>Figma, Canva</li>
                         <li>Responsive Design</li>
                     </ul>
                 </div>
@@ -213,6 +244,7 @@
         </div>
     </footer>
 
+    <script src="js/intro-greeting.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>
