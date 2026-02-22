@@ -99,6 +99,76 @@ animateElements.forEach(selector => {
     });
 });
 
+// Timeline Progressive Animation
+function animateTimeline() {
+    const timeline = document.querySelector('.timeline');
+    if (!timeline) return;
+
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    if (timelineItems.length === 0) return;
+
+    const timelineRect = timeline.getBoundingClientRect();
+    const timelineTop = timeline.offsetTop;
+    const timelineHeight = timelineRect.height;
+    const scrollPosition = window.scrollY;
+    const viewportHeight = window.innerHeight;
+    
+    // Calculate when timeline enters viewport
+    const timelineStart = timelineTop - viewportHeight + 200; // Start animating 200px before entering viewport
+    const timelineEnd = timelineTop + timelineHeight;
+    
+    // Calculate fill percentage based on scroll progress
+    let fillPercentage = 0;
+    
+    if (scrollPosition >= timelineStart) {
+        const scrolledPastStart = scrollPosition - timelineStart;
+        const totalScrollable = timelineEnd - timelineStart;
+        fillPercentage = (scrolledPastStart / totalScrollable) * 100;
+        fillPercentage = Math.min(100, Math.max(0, fillPercentage));
+    }
+
+    // Update the blue line height using CSS variable
+    timeline.style.setProperty('--timeline-fill', `${fillPercentage}%`);
+
+    // Update individual timeline items visibility
+    timelineItems.forEach((item) => {
+        const itemRect = item.getBoundingClientRect();
+        const itemTop = itemRect.top + window.scrollY;
+        const itemCenter = itemTop + (itemRect.height / 2);
+        const currentScroll = scrollPosition + viewportHeight;
+        
+        // Check if item center has passed the viewport (with some offset)
+        if (currentScroll >= itemCenter - 150) {
+            item.classList.add('visible');
+        } else {
+            item.classList.remove('visible');
+        }
+    });
+}
+
+// Update timeline on scroll with throttling
+let timelineAnimationFrame;
+window.addEventListener('scroll', () => {
+    if (timelineAnimationFrame) {
+        cancelAnimationFrame(timelineAnimationFrame);
+    }
+    timelineAnimationFrame = requestAnimationFrame(() => {
+        animateTimeline();
+    });
+});
+
+// Initial call on page load
+window.addEventListener('load', () => {
+    animateTimeline();
+});
+
+// Also call immediately if page is already loaded
+if (document.readyState === 'complete') {
+    animateTimeline();
+} else {
+    document.addEventListener('DOMContentLoaded', animateTimeline);
+}
+
 // Custom Cursor
 const cursor = document.querySelector('.cursor');
 const cursorFollower = document.querySelector('.cursor-follower');
